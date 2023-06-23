@@ -1,0 +1,91 @@
+﻿<Window x:Class="MoonCalculator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MoonCalculator"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.DatePicker.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Margin="10, 0, 10, 0">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <materialDesign:ColorZone Grid.Row="0"
+            Padding="16"
+            materialDesign:ElevationAssist.Elevation="Dp4"
+            ClipToBounds="False"
+            CornerRadius="10"
+            Mode="PrimaryDark">
+            <StackPanel  Orientation="Horizontal">
+                <ToggleButton Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
+                <TextBlock Margin="16,0,0,0" VerticalAlignment="Center" Text="Фаза луны" />
+
+            </StackPanel>
+        </materialDesign:ColorZone>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <DatePicker x:Name="Selected_Date" Grid.Column="0" Width="200" materialDesign:HintAssist.Hint="Григорианская дата" materialDesign:TextFieldAssist.HasClearButton="False"
+            Style="{StaticResource MaterialDesignFloatingHintDatePicker}" HorizontalAlignment="Left" SelectedDateChanged="Calendar_SelectedDataChanged" />
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" IsEnabled="False" Style="{StaticResource MaterialDesignCaptionTextBlock}" Text="Точность вычисления" />
+                <TextBlock x:Name="slider_text" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="Знаков после запятой: 2" />
+                <Slider x:Name="slider" TickFrequency="1" Margin="40, 0, 40, 0" Grid.Row="2" Maximum="10" Minimum="0" Value="2" ValueChanged="Slider_ValueChanged" />
+            </Grid>
+            
+            
+        </Grid>
+        <Button Grid.Row="2" Width="300" Content="РАСЧИТАТЬ" IsEnabled="{Binding DataContext.ControlsEnabled, 
+            RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Style="{StaticResource MaterialDesignRaisedLightButton}" 
+            ToolTip="Resource name: MaterialDesignRaisedLightButton" Click="Button_Click" />
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" IsEnabled="False" Style="{StaticResource MaterialDesignCaptionTextBlock}" Text="Возраст луны (дней)" />
+            <TextBlock Grid.Column="1" Grid.Row="0" IsEnabled="False" Style="{StaticResource MaterialDesignCaptionTextBlock}" Text="Возраст луны (процентов от полной)" />
+            <TextBlock Grid.Column="2" Grid.Row="0" IsEnabled="False" Style="{StaticResource MaterialDesignCaptionTextBlock}" Text="Фаза луны" />
+            <TextBlock x:Name="age_moon"  Grid.Column="0" Grid.Row="1" Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="Regular 20sp" />
+            <TextBlock x:Name="age_moon_persent" Grid.Column="1" Grid.Row="1" Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="Regular 20sp" />
+            <TextBlock x:Name="phase_moon" Grid.Column="2" Grid.Row="1" Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="Regular 20sp" />
+        </Grid>
+        <Grid Grid.Row="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" IsEnabled="False" Style="{StaticResource MaterialDesignCaptionTextBlock}" Text="Направление" />
+            <TextBlock x:Name="direction_moon" Grid.Column="0" Grid.Row="1" Style="{StaticResource MaterialDesignHeadline5TextBlock}" Text="Regular 20sp" />
+        </Grid>
+    </Grid>
+</Window>
